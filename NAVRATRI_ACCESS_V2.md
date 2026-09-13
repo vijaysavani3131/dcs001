@@ -38,7 +38,7 @@ No printer is required on event night. Generate a batch in advance, print all si
 
 `navratri-access-platform-v2.zip`
 
-SHA-256: `d6334fe0deac732c9d7c490adaa60036dd7a1448e69dcdf2de631bfc6a1ea0d2`
+SHA-256: `555687d48bf90bbd73538ee8049bd57594d4881e5a5b3bb1f5ebf7d5b1b97ae2`
 
 ## Security boundary
 
