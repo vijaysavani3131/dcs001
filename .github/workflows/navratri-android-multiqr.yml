@@ -1,0 +1,32 @@
+name: Navratri Android Multi-QR APK
+
+on:
+  push:
+    branches:
+      - feature/navratri-access-platform-v2-multiqr
+  workflow_dispatch:
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+      - name: Install Android SDK 37
+        run: yes | sdkmanager "platforms;android-37" "build-tools;36.0.0" || true
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.5.0'
+      - name: Build debug APK
+        working-directory: navratri-access-platform-v2/android
+        run: gradle --no-daemon --stacktrace assembleDebug
+      - uses: actions/upload-artifact@v4
+        with:
+          name: navratri-access-multiqr-debug-apk
+          path: navratri-access-platform-v2/android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
