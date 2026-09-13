@@ -7,13 +7,17 @@ plugins {
 
 android {
     namespace = "com.navratri.access"
-    compileSdk = 37
+    compileSdk = 36
     defaultConfig {
         applicationId = "com.navratri.access"
         minSdk = 28
-        targetSdk = 37
+        targetSdk = 36
         versionCode = 3
         versionName = "2.1.0-multiqr"
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     buildFeatures { compose = true; buildConfig = true }
     buildTypes {
@@ -23,6 +27,7 @@ android {
     packaging { resources.excludes += setOf("META-INF/AL2.0", "META-INF/LGPL2.1") }
 }
 
+kotlin { jvmToolchain(17) }
 kapt { correctErrorTypes = true }
 
 dependencies {

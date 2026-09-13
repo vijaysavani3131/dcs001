@@ -19,19 +19,15 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
-import com.google.mlkit.vision.barcode.Barcode
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
+import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.common.InputImage
 import java.security.MessageDigest
 import java.util.concurrent.Executors
 import kotlin.math.max
 import kotlin.math.min
 
-/**
- * One QR currently visible in the camera frame.
- * Coordinates are normalized (0..1) against the upright ML Kit image.
- */
 data class QrObservation(
     val id: String,
     val rawValue: String?,
@@ -51,14 +47,6 @@ private fun qrTrackId(raw: String): String {
     return digest.take(8).joinToString("") { "%02x".format(it) }
 }
 
-/**
- * CameraX + bundled ML Kit multi-QR camera.
- *
- * - QR-only detection keeps latency lower than scanning every barcode format.
- * - enableAllPotentialBarcodes() lets the UI draw amber boxes around codes that
- *   are visible but still too small / blurred to decode.
- * - STRATEGY_KEEP_ONLY_LATEST prevents a backlog during heavy crowd movement.
- */
 @SuppressLint("UnsafeOptInUsageError")
 @Composable
 fun MultiQrCamera(
@@ -89,7 +77,6 @@ fun MultiQrCamera(
         modifier = modifier,
         factory = { ctx ->
             PreviewView(ctx).apply {
-                // FIT_CENTER makes overlay geometry much more predictable than a cropped preview.
                 scaleType = PreviewView.ScaleType.FIT_CENTER
                 implementationMode = PreviewView.ImplementationMode.COMPATIBLE
 
@@ -161,7 +148,6 @@ fun MultiQrCamera(
     )
 }
 
-/** Existing single-QR screen can share the same reliable camera pipeline. */
 @Composable
 fun QrCamera(
     modifier: Modifier = Modifier,
