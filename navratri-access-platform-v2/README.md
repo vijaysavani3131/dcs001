@@ -52,6 +52,4 @@ No serverless offline system can guarantee strict global duplicate prevention if
 - Compose UI 1.12.1 / Material3 1.4.0
 - Laravel 13 / PHP 8.3+
 
-## Package checksum
-
-SHA-256: `d6334fe0deac732c9d7c490adaa60036dd7a1448e69dcdf2de631bfc6a1ea0d2`
+The authoritative frozen ZIP checksum is kept in the branch-level `NAVRATRI_ACCESS_V2.md` handoff manifest so the archive README does not need to checksum itself.
