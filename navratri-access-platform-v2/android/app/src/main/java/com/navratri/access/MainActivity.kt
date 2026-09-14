@@ -17,7 +17,7 @@ class MainActivity:ComponentActivity(){
         requestRuntimePermissions()
         val app=application as NavratriApp
         val vm=ViewModelProvider(this,object:ViewModelProvider.Factory{override fun <T:ViewModel> create(modelClass:Class<T>):T=@Suppress("UNCHECKED_CAST") (MainViewModel(app.repository,app.mesh) as T)})[MainViewModel::class.java]
-        setContent{NavratriRoot(vm,"https://eventmanagement.isavgo.com")}
+        setContent{NavratriRoot(vm,"https://eventmanagement.isavgo.com/Navratri")}
         vm.load()
     }
     private fun requestRuntimePermissions(){
